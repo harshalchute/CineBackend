@@ -23,7 +23,7 @@ public class ShowController {
     }
 
 
-    @PostMapping("addShowSeats")
+    @PostMapping("/addShowSeats")
     public String addShowSeats(@RequestBody AddShowSeatsRequest showSeatsRequest){
         String result = showService.addShowSeats(showSeatsRequest);
         return result;
