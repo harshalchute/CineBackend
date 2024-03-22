@@ -11,6 +11,6 @@ public class UserService {
     private UserRepository userRepository;
     public String addUser(User user){
         user = userRepository.save(user);
-        return "The user has been saved to the DB with userId + " + user.getUserId() + " name " + user.getName();
+        return "The user has been saved to the DB with userId  " + user.getUserId() + " name " + user.getName();
     }
 }

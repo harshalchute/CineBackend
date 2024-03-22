@@ -16,7 +16,7 @@ import java.time.LocalTime;
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String ticketId;
+    private Integer ticketId;
 
     private String movieName;
 

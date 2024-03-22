@@ -24,7 +24,7 @@ public class TicketController {
             Ticket ticket = ticketService.bookTicket(bookTicketRequest);
             return new ResponseEntity(ticket,HttpStatus.OK);
         }catch (Exception e){
-            String errMsg =  "Error while bookinh your tickets : " + e.getMessage();
+            String errMsg =  "Error while booking your tickets : " + e.getMessage();
             return new ResponseEntity(errMsg, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
