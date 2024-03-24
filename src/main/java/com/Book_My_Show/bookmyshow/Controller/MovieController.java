@@ -18,6 +18,8 @@ public class MovieController {
         return result;
     }
 
+
+
 //    @PutMapping("/updateMovie")
 //    public String updateMovieAttributes(@RequestParam("movieId")Integer movieId,
 //                                        @RequestParam("duration")double duration,
@@ -26,6 +28,8 @@ public class MovieController {
 //    }
 //    Instead of the above api call we can have api call with RequestBody with the help of DTO
 //    DTO[Data Transfer Object] : It is just like encapsulation.
+
+
 
     @PutMapping("/updateMovie")
     public String updateMovieAttributes(@RequestBody UpdateMovieRequest movieRequest){
