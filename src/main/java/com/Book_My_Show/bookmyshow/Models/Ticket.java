@@ -3,6 +3,7 @@ package com.Book_My_Show.bookmyshow.Models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -10,13 +11,15 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "tickets")
-@Builder
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Ticket {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String ticketId;
 
     private String movieName;
 
@@ -31,5 +34,6 @@ public class Ticket {
     @ManyToOne
     @JoinColumn
     private User user;
+
 
 }
