@@ -35,5 +35,4 @@ public class Ticket {
     @JoinColumn
     private User user;
 
-
 }
