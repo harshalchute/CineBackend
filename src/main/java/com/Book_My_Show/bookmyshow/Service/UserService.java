@@ -28,6 +28,7 @@ public class UserService {
                 "to browse the movies and use COUPON START100 for instant discount";
         message.setText(body);
 
+        javaMailSender.send(message);
 
         return "The user has been saved to the DB with userId  " + user.getUserId() + " name " + user.getName();
     }
