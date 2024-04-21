@@ -1,14 +1,18 @@
 package com.Book_My_Show.bookmyshow.Controller;
 
 
+import com.Book_My_Show.bookmyshow.Models.Show;
+import com.Book_My_Show.bookmyshow.Models.Ticket;
 import com.Book_My_Show.bookmyshow.Requests.AddShowRequest;
 import com.Book_My_Show.bookmyshow.Requests.AddShowSeatsRequest;
+import com.Book_My_Show.bookmyshow.Requests.GetShowByMovieRequest;
 import com.Book_My_Show.bookmyshow.Service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("shows")
@@ -27,5 +31,16 @@ public class ShowController {
     public String addShowSeats(@RequestBody AddShowSeatsRequest showSeatsRequest){
         String result = showService.addShowSeats(showSeatsRequest);
         return result;
+    }
+
+
+    @GetMapping("/getShowByMovie")
+    public ResponseEntity<List<GetShowByMovieRequest>> getShowByMovie(@RequestParam String movieName){
+        try{
+            List<GetShowByMovieRequest> list = showService.getShowByMovie(movieName);
+            return new ResponseEntity(list,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -8,7 +8,10 @@ import com.Book_My_Show.bookmyshow.Repository.ShowSeatRepository;
 import com.Book_My_Show.bookmyshow.Repository.TheaterRepository;
 import com.Book_My_Show.bookmyshow.Requests.AddShowRequest;
 import com.Book_My_Show.bookmyshow.Requests.AddShowSeatsRequest;
+import com.Book_My_Show.bookmyshow.Requests.GetShowByMovieRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -80,5 +83,32 @@ public class ShowService {
 
         showSeatRepository.saveAll(showSeatList);
         return "Show seats have been generated for the given showId " + showId;
+    }
+
+    public List<GetShowByMovieRequest> getShowByMovie(String movieName) throws Exception{
+        boolean flag = false;
+        List<Show> list = showRepository.findAll();
+        List<GetShowByMovieRequest> ansList = new ArrayList<>();
+        for(Show show : list) {
+            if ((show.getMovie() != null) && (show.getMovie().getMovieName().equals(movieName))) {
+
+                flag = true;
+
+                Theater theater = show.getTheater();
+
+                GetShowByMovieRequest showDto = new GetShowByMovieRequest();
+
+                showDto.setShowDate(show.getShowDate());
+                showDto.setShowTime(show.getShowTime());
+                showDto.setTheaterName(theater.getName());
+                showDto.setTheaterAddress(theater.getAddress());
+
+                ansList.add(showDto);
+            }
+        }
+        if(!flag){
+            throw new Exception("Shows are not available");
+        }
+        return ansList;
     }
 }
