@@ -9,6 +9,8 @@ import com.Book_My_Show.bookmyshow.Repository.TheaterRepository;
 import com.Book_My_Show.bookmyshow.Requests.AddShowRequest;
 import com.Book_My_Show.bookmyshow.Requests.AddShowSeatsRequest;
 import com.Book_My_Show.bookmyshow.Requests.GetShowByMovieRequest;
+import com.Book_My_Show.bookmyshow.Requests.GetShowByTheaterRequest;
+import jdk.jshell.spi.ExecutionControlProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -107,7 +109,35 @@ public class ShowService {
             }
         }
         if(!flag){
-            throw new Exception("Shows are not available");
+            throw new Exception("Shows are not available for this Movie : " + movieName);
+        }
+        return ansList;
+    }
+
+
+    public List<GetShowByTheaterRequest> getShowByTheater(String theaterName) throws Exception{
+        boolean flag = false;
+        List<Show> listShow = showRepository.findAll();
+        List<GetShowByTheaterRequest> ansList = new ArrayList<>();
+        for(Show show : listShow){
+            Theater theater = show.getTheater();
+            if((show.getMovie() != null) && (show.getTheater() != null) && (theater.getName().equals(theaterName))){
+                flag = true;
+
+                Movie movie = show.getMovie();
+
+                GetShowByTheaterRequest showDto = new GetShowByTheaterRequest();
+
+                showDto.setMovieName(movie.getMovieName());
+                showDto.setTheaterAddress(theater.getAddress());
+                showDto.setShowTime(show.getShowTime());
+                showDto.setShowDate(show.getShowDate());
+
+                ansList.add(showDto);
+            }
+        }
+        if(!flag){
+            throw new Exception("Shows are not available for the Theater : " + theaterName);
         }
         return ansList;
     }
