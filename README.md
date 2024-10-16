@@ -41,7 +41,7 @@ Future iterations of CineBackend may include additional features such as:
 - Advanced search and filtering options for easier navigation.
 
 
-### How to Run : 
+### How to Clone : 
 
     Clone the repository:
         -git clone https://github.com/yourusername/CineBackend.git
